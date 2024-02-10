@@ -17,7 +17,7 @@ function showNotes() {
                 <h5 class="card-title">${note['title']}</h5>
                 <p class="card-text">${note['text']}</p>
                 <p>Дата последнего изменения: ${note['date']}</p>
-                <button type="button" class="btn btn-warning">Редактировать</button>
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editNoteModal" onclick="showEditNote(${index})">Редактировать</button>
                 <button type="button" class="btn btn-danger" onclick="deleteNote(${index})">Удалить</button>
               </div>
             </div>
@@ -27,6 +27,40 @@ function showNotes() {
 
         document.getElementById('notes').innerHTML = content
     }
+}
+
+function showEditNote(indexNote) {
+    let note = getNotesFromJSON(localStorage.getItem('notes'))[indexNote]
+
+    document.getElementById('title_note_edit').value = note['title']
+    document.getElementById('text_note_edit').value = note['text']
+    document.getElementById('button_edit_note').onclick = () => editNote(indexNote)
+
+}
+
+function editNote(indexNote) {
+    let notes = getNotesFromJSON(localStorage.getItem('notes'))
+
+    notes[indexNote].title = document.getElementById('title_note_edit').value
+    notes[indexNote].text = document.getElementById('text_note_edit').value
+    notes[indexNote].date = currentDate()
+
+    localStorage.setItem('notes', JSON.stringify({
+        notes
+    }))
+
+    showNotes()
+
+    document.getElementById('notification_edit_note').innerHTML = `
+            <p class="fs-3 text-center text-success">Заметка отредактирована!</p>
+        `
+
+    setTimeout(() => {
+        document.getElementById('notification_edit_note').innerHTML = ``
+    }, 2000)
+
+    document.getElementById('title_note_edit').value = ''
+    document.getElementById('text_note_edit').value = ''
 }
 
 function deleteNote(indexNote) {

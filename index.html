@@ -53,6 +53,34 @@
         <div class="container p-3 border border-success rounded mt-4">
             <article id="notes" class="row"></article>
         </div>
+
+        <div class="modal fade" id="editNoteModal" tabindex="-1" aria-labelledby="editNoteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editNoteModalLabel">Редактирование заметки</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="notification_edit_note"></div>
+
+                        <form>
+                            <label for="title_note">Заголовок</label>
+                            <input type="text" id="title_note_edit" class="form-control" placeholder="Введите заголовок заметки">
+
+                            <br/>
+
+                            <label for="text_note">Текст</label>
+                            <textarea name="text_note" id="text_note_edit" class="form-control" placeholder="Введите текст заметки"></textarea>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-warning" id="button_edit_note">Редактировать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer></footer>
